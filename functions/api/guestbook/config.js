@@ -1,0 +1,1 @@
+export async function onRequestGet({env}){return Response.json({ready:!!(env.DB&&env.TURNSTILE_SITE_KEY&&env.TURNSTILE_SECRET),sitekey:env.TURNSTILE_SITE_KEY||''},{headers:{'Cache-Control':'no-store'}})}
