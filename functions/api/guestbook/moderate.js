@@ -4,7 +4,7 @@ const enc = new TextEncoder();
 async function authorized(request, env) {
   const expected = env.GUESTBOOK_ADMIN_KEY;
   const given = request.headers.get('Authorization') || '';
-  if (typeof expected !== 'string' || expected.length < 32 || !given.startsWith('Bearer ')) return false;
+  if (typeof expected !== 'string' || expected.length < 14 || !given.startsWith('Bearer ')) return false;
   const token = given.slice(7);
   // Hash before comparison so comparison lengths and timing do not reveal key characters.
   const [a, b] = await Promise.all([crypto.subtle.digest('SHA-256', enc.encode(expected)), crypto.subtle.digest('SHA-256', enc.encode(token))]);
