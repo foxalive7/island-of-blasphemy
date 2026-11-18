@@ -1,11 +1,11 @@
 export async function onRequestGet({ env }) {
-  const bindingPresent = !!env.DB;
+  const bindingPresent = !!env.Guestbook;
   const siteKeyPresent = !!env.TURNSTILE_SITE_KEY;
   const secretPresent = !!env.TURNSTILE_SECRET;
   let databaseQuery = 'not_checked';
   if (bindingPresent) {
     try {
-      await env.DB.prepare('SELECT COUNT(*) AS count FROM guestbook_messages').first();
+      await env.Guestbook.prepare('SELECT COUNT(*) AS count FROM guestbook_messages').first();
       databaseQuery = 'ok';
     } catch {
       databaseQuery = 'failed';
